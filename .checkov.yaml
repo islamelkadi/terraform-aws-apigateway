@@ -1,0 +1,32 @@
+# Checkov configuration for Terraform security scanning
+# https://www.checkov.io/
+
+# Directories to scan
+directory:
+  - .
+
+# Frameworks to scan
+framework:
+  - terraform
+
+# Skip specific checks (with justification)
+skip-check:
+  # Add any module-specific check skips here with justification
+
+# Compact output format
+compact: true
+
+# Quiet mode (only show failed checks)
+quiet: false
+
+# Output format
+output: cli
+
+# Soft fail mode (don't exit with error code)
+soft-fail: false
+
+# Download external modules
+download-external-modules: true
+
+# External modules download directory
+external-modules-download-path: .external_modules
