@@ -10,7 +10,6 @@ This module creates an AWS API Gateway REST API with Lambda integration, mock in
 - [Usage](#usage)
 - [Requirements](#requirements)
 - [MCP Servers](#mcp-servers)
-- [License](#license)
 
 
 ## Prerequisites
@@ -240,11 +239,6 @@ module "review_api" {
 ```
 
 
-## License
-
-MIT Licensed. See LICENSE for full details.
-
-
 ## MCP Servers
 
 This module includes two [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers configured in `.kiro/settings/mcp.json` for use with Kiro:
@@ -438,7 +432,3 @@ module "api_gateway" {
 
 See [example/](example/) for a complete working example with all features.
 
-## License
-
-MIT Licensed. See [LICENSE](LICENSE) for full details.
-<!-- END_TF_DOCS -->
