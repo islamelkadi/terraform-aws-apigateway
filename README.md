@@ -114,8 +114,7 @@ For complete security standards and implementation details, see [AWS Security St
 
 ```hcl
 module "review_api" {
-  source = "../../modules/terraform-aws-apigateway"
-
+  source = "github.com/islamelkadi/terraform-aws-apigateway"
   namespace   = "example"
   environment = "prod"
   name        = "review-api"
@@ -144,8 +143,7 @@ module "review_api" {
 
 ```hcl
 module "mock_api" {
-  source = "../../modules/terraform-aws-apigateway"
-
+  source = "github.com/islamelkadi/terraform-aws-apigateway"
   namespace   = "example"
   environment = "dev"
   name        = "mock-api"
@@ -187,8 +185,7 @@ module "mock_api" {
 
 ```hcl
 module "review_api" {
-  source = "../../modules/terraform-aws-apigateway"
-
+  source = "github.com/islamelkadi/terraform-aws-apigateway"
   namespace   = "example"
   environment = "prod"
   name        = "review-api"
@@ -254,8 +251,7 @@ Both servers run via `uvx` and require no additional installation beyond the [bo
 # Demonstrates API Gateway with mock integrations
 
 module "api_gateway" {
-  source = "../"
-
+  source = "github.com/islamelkadi/terraform-aws-apigateway"
   namespace   = var.namespace
   environment = var.environment
   name        = var.name
