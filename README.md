@@ -5,12 +5,13 @@ This module creates an AWS API Gateway REST API with Lambda integration, mock in
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Security Controls](#security-controls)
+- [Security](#security)
 - [Features](#features)
 - [Usage](#usage)
 - [Requirements](#requirements)
+- [MCP Servers](#mcp-servers)
+- [License](#license)
 
----
 
 ## Prerequisites
 
@@ -27,7 +28,11 @@ make bootstrap
 
 This will install/upgrade: tfenv, Terraform (via tfenv), tflint, terraform-docs, checkov, and pre-commit.
 
-## Security Controls
+
+
+## Security
+
+### Security Controls
 
 This module implements security controls to comply with:
 - AWS Foundational Security Best Practices (FSBP)
@@ -64,6 +69,37 @@ This module implements security controls to comply with:
 
 For complete security standards and implementation details, see [AWS Security Standards](../../../.kiro/steering/aws/aws-security-standards.md).
 
+### Environment-Based Security Controls
+
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
+
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| KMS customer-managed keys | Optional | Required | Required |
+| Access logging | Optional | Required | Required |
+| X-Ray tracing | Optional | Required | Required |
+| Log retention | 7 days | 90 days | 365 days |
+| Throttling | Relaxed | Production-like | Enforced |
+
+For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
+
+### Security Best Practices
+
+**Production APIs:**
+- Enable access logging with 365-day retention
+- Enable X-Ray tracing for observability
+- Use KMS customer-managed keys for log encryption
+- Configure throttling limits
+- Use IAM or Cognito authorizers for authentication
+- Enable CORS only for trusted origins
+- Use private or regional endpoints when possible
+
+**Development APIs:**
+- Access logging optional for cost savings
+- X-Ray tracing optional
+- Shorter log retention acceptable
+
+For complete security standards and implementation details, see [AWS Security Standards](../../../.kiro/steering/aws/aws-security-standards.md).
 ## Features
 
 - REST API with configurable endpoint types (EDGE, REGIONAL, PRIVATE)
@@ -203,34 +239,11 @@ module "review_api" {
 }
 ```
 
-## Security Controls
-
-This module implements security controls that can be enforced via the `security_controls` variable:
-
-- Access logging to CloudWatch Logs
-- X-Ray tracing for observability
-- KMS encryption for logs
-- Log retention policies
-
-Security controls can be selectively overridden using `security_control_overrides` with documented justification.
 
 ## License
 
 MIT Licensed. See LICENSE for full details.
 
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| KMS customer-managed keys | Optional | Required | Required |
-| Access logging | Optional | Required | Required |
-| X-Ray tracing | Optional | Required | Required |
-| Log retention | 7 days | 90 days | 365 days |
-| Throttling | Relaxed | Production-like | Enforced |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
 
 ## MCP Servers
 
