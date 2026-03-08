@@ -62,12 +62,12 @@ output "cloudwatch_role_arn" {
 
 output "log_group_name" {
   description = "Name of the CloudWatch Log Group"
-  value       = var.create_log_group ? module.log_group[0].log_group_name : null
+  value       = var.create_log_group ? aws_cloudwatch_log_group.api_gateway[0].name : null
 }
 
 output "log_group_arn" {
   description = "ARN of the CloudWatch Log Group"
-  value       = var.create_log_group ? module.log_group[0].log_group_arn : null
+  value       = var.create_log_group ? aws_cloudwatch_log_group.api_gateway[0].arn : null
 }
 
 output "tags" {
