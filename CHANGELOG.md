@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/islamelkadi/terraform-aws-apigateway/compare/v1.0.1...v1.0.2) (2026-03-08)
+
+
+### Bug Fixes
+
+* address Checkov security findings ([152b756](https://github.com/islamelkadi/terraform-aws-apigateway/commit/152b7566e70cfff6ce3439371c5735ffa9d14b9b))
+
 ## [1.0.1](https://github.com/islamelkadi/terraform-aws-apigateway/compare/v1.0.0...v1.0.1) (2026-03-08)
 
 
