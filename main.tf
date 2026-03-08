@@ -13,6 +13,10 @@ resource "aws_api_gateway_rest_api" "this" {
   # Disable default endpoint if using custom domain
   disable_execute_api_endpoint = var.disable_execute_api_endpoint
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = local.tags
 }
 
