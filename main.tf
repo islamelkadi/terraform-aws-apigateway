@@ -73,22 +73,20 @@ resource "aws_api_gateway_stage" "this" {
 }
 
 # CloudWatch Log Group for API Gateway (if enabled)
-module "log_group" {
-  count  = var.create_log_group ? 1 : 0
-  source = "../terraform-aws-cloudwatch/modules/logs"
+resource "aws_cloudwatch_log_group" "api_gateway" {
+  count = var.create_log_group ? 1 : 0
 
-  namespace   = var.namespace
-  environment = var.environment
-  name        = var.name
-  attributes  = concat(var.attributes, ["apigateway"])
-  delimiter   = var.delimiter
-  region      = var.region
+  name              = "/aws/apigateway/${local.api_name}"
+  retention_in_days = var.log_retention_days
+  kms_key_id        = var.kms_key_arn
 
-  log_group_name_override = "/aws/apigateway/${local.api_name}"
-  retention_in_days       = var.log_retention_days
-  kms_key_id              = var.kms_key_arn
-
-  tags = var.tags
+  tags = merge(
+    module.metadata.security_tags,
+    var.tags,
+    {
+      Name = "/aws/apigateway/${local.api_name}"
+    }
+  )
 }
 
 # API Gateway Account (for CloudWatch Logs role)

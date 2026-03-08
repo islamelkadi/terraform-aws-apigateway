@@ -1,3 +1,7 @@
+# Primary Module Example - This demonstrates the terraform-aws-apigateway module
+# Supporting infrastructure (KMS) is defined in separate files
+# to keep this example focused on the module's core functionality.
+#
 # API Gateway Module Example
 # Demonstrates API Gateway with mock integrations
 
@@ -46,8 +50,8 @@ module "api_gateway" {
   cache_ttl_seconds    = var.cache_ttl_seconds
   cache_data_encrypted = var.cache_data_encrypted
 
-  # Encryption (optional)
-  kms_key_arn = var.kms_key_arn
+  # Direct reference to kms.tf module output
+  kms_key_arn = module.kms_key.key_arn
 
   # Stage configuration
   stage_name        = var.stage_name

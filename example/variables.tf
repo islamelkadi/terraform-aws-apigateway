@@ -153,11 +153,6 @@ variable "cache_data_encrypted" {
   default     = true
 }
 
-variable "kms_key_arn" {
-  description = "ARN of KMS key for encryption"
-  type        = string
-}
-
 variable "stage_name" {
   description = "Stage name"
   type        = string

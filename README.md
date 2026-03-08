@@ -104,14 +104,20 @@ Both servers run via `uvx` and require no additional installation beyond the [bo
 
 <!-- BEGIN_TF_DOCS -->
 
+
 ## Usage
 
 ```hcl
+# Primary Module Example - This demonstrates the terraform-aws-apigateway module
+# Supporting infrastructure (KMS) is defined in separate files
+# to keep this example focused on the module's core functionality.
+#
 # API Gateway Module Example
 # Demonstrates API Gateway with mock integrations
 
 module "api_gateway" {
-  source = "github.com/islamelkadi/terraform-aws-apigateway"
+  source = "../"
+
   namespace   = var.namespace
   environment = var.environment
   name        = var.name
@@ -154,8 +160,8 @@ module "api_gateway" {
   cache_ttl_seconds    = var.cache_ttl_seconds
   cache_data_encrypted = var.cache_data_encrypted
 
-  # Encryption (optional)
-  kms_key_arn = var.kms_key_arn
+  # Direct reference to kms.tf module output
+  kms_key_arn = module.kms_key.key_arn
 
   # Stage configuration
   stage_name        = var.stage_name
@@ -183,8 +189,7 @@ module "api_gateway" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_log_group"></a> [log\_group](#module\_log\_group) | ../terraform-aws-cloudwatch/modules/logs | n/a |
-| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.1.0 |
+| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.0.0 |
 
 ## Resources
 
@@ -208,6 +213,7 @@ module "api_gateway" {
 | [aws_api_gateway_resource.mock](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_resource) | resource |
 | [aws_api_gateway_rest_api.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api) | resource |
 | [aws_api_gateway_stage.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage) | resource |
+| [aws_cloudwatch_log_group.api_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_iam_role.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_permission.api_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
@@ -282,3 +288,7 @@ module "api_gateway" {
 
 See [example/](example/) for a complete working example with all features.
 
+## License
+
+MIT Licensed. See [LICENSE](LICENSE) for full details.
+<!-- END_TF_DOCS -->
