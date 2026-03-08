@@ -75,11 +75,11 @@ resource "aws_api_gateway_stage" "this" {
 # CloudWatch Log Group for API Gateway (if enabled)
 resource "aws_cloudwatch_log_group" "api_gateway" {
   count = var.create_log_group ? 1 : 0
-  
+
   name              = "/aws/apigateway/${local.api_name}"
   retention_in_days = var.log_retention_days
   kms_key_id        = var.kms_key_arn
-  
+
   tags = merge(
     module.metadata.security_tags,
     var.tags,
