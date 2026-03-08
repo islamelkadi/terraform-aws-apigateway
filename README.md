@@ -1,5 +1,9 @@
 # Terraform AWS API Gateway REST API Module
 
+[![Terraform Security](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-security.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-security.yaml)
+[![Terraform Lint & Validation](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-lint.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-lint.yaml)
+[![Terraform Docs](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-docs.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-docs.yaml)
+
 This module creates an AWS API Gateway REST API with Lambda integration, mock integrations, CORS support, and security best practices.
 
 ## Table of Contents
