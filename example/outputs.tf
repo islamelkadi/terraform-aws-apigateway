@@ -49,3 +49,19 @@ output "mock_endpoints" {
   description = "Mock endpoint URLs"
   value       = module.api_gateway.mock_endpoints
 }
+
+# WAF Outputs
+output "waf_web_acl_id" {
+  description = "WAF Web ACL ID"
+  value       = aws_wafv2_web_acl.api_gateway.id
+}
+
+output "waf_web_acl_arn" {
+  description = "WAF Web ACL ARN"
+  value       = aws_wafv2_web_acl.api_gateway.arn
+}
+
+output "waf_web_acl_name" {
+  description = "WAF Web ACL name"
+  value       = aws_wafv2_web_acl.api_gateway.name
+}

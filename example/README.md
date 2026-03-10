@@ -73,7 +73,9 @@ This example includes:
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.34 |
 
 ## Modules
 
@@ -84,7 +86,11 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_cloudwatch_log_group.waf_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_wafv2_web_acl.api_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl) | resource |
+| [aws_wafv2_web_acl_logging_configuration.api_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl_logging_configuration) | resource |
 
 ## Inputs
 
@@ -105,7 +111,6 @@ No resources.
 | <a name="input_enable_xray_tracing"></a> [enable\_xray\_tracing](#input\_enable\_xray\_tracing) | Enable X-Ray tracing | `bool` | `true` | no |
 | <a name="input_endpoint_types"></a> [endpoint\_types](#input\_endpoint\_types) | List of endpoint types (EDGE, REGIONAL, PRIVATE) | `list(string)` | <pre>[<br/>  "REGIONAL"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name (dev, staging, prod) | `string` | n/a | yes |
-| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | ARN of KMS key for encryption | `string` | n/a | yes |
 | <a name="input_lambda_integration"></a> [lambda\_integration](#input\_lambda\_integration) | Lambda integration configuration | <pre>object({<br/>    lambda_function_name = string<br/>    lambda_invoke_arn    = string<br/>    http_methods         = list(string)<br/>    authorization_type   = string<br/>    api_key_required     = bool<br/>    timeout_milliseconds = number<br/>    resource_id          = optional(string)<br/>  })</pre> | `null` | no |
 | <a name="input_log_retention_days"></a> [log\_retention\_days](#input\_log\_retention\_days) | CloudWatch Logs retention in days | `number` | `90` | no |
 | <a name="input_logging_level"></a> [logging\_level](#input\_logging\_level) | Logging level (OFF, ERROR, INFO) | `string` | `"INFO"` | no |
@@ -119,6 +124,7 @@ No resources.
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags | `map(string)` | `{}` | no |
 | <a name="input_throttling_burst_limit"></a> [throttling\_burst\_limit](#input\_throttling\_burst\_limit) | Throttling burst limit | `number` | `5000` | no |
 | <a name="input_throttling_rate_limit"></a> [throttling\_rate\_limit](#input\_throttling\_rate\_limit) | Throttling rate limit | `number` | `10000` | no |
+| <a name="input_waf_rate_limit"></a> [waf\_rate\_limit](#input\_waf\_rate\_limit) | Rate limit for WAF (requests per 5-minute period from a single IP) | `number` | `2000` | no |
 
 ## Outputs
 
@@ -134,4 +140,7 @@ No resources.
 | <a name="output_stage_arn"></a> [stage\_arn](#output\_stage\_arn) | API Gateway stage ARN |
 | <a name="output_stage_id"></a> [stage\_id](#output\_stage\_id) | API Gateway stage ID |
 | <a name="output_stage_invoke_url"></a> [stage\_invoke\_url](#output\_stage\_invoke\_url) | Stage invoke URL |
+| <a name="output_waf_web_acl_arn"></a> [waf\_web\_acl\_arn](#output\_waf\_web\_acl\_arn) | WAF Web ACL ARN |
+| <a name="output_waf_web_acl_id"></a> [waf\_web\_acl\_id](#output\_waf\_web\_acl\_id) | WAF Web ACL ID |
+| <a name="output_waf_web_acl_name"></a> [waf\_web\_acl\_name](#output\_waf\_web\_acl\_name) | WAF Web ACL name |
 <!-- END_TF_DOCS -->

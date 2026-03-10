@@ -21,5 +21,8 @@ skip-check:
   # API Gateway Request Validation - Use-case specific
   - CKV2_AWS_53  # Request validation requires defining request models which are use-case specific
   
-  # API Gateway WAF - Optional security feature, adds cost
-  - CKV2_AWS_29  # WAF protection adds significant cost and complexity
+  # WAF Rule Configuration - Outside module scope
+  - CKV2_AWS_77  # Log4j vulnerability protection is configured in the WAF Web ACL, not in this module
+  
+  # CloudWatch Log Retention - Example code
+  - CKV_AWS_338  # Log retention of 1 year adds cost. Examples use shorter retention for cost efficiency

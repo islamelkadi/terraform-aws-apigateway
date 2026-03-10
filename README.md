@@ -49,6 +49,7 @@ This module implements security controls to comply with:
 - [x] **Log Retention**: Configurable retention policies (365 days recommended)
 - [x] **Throttling**: Rate limiting to prevent abuse
 - [x] **Authorization**: IAM, Cognito, or Lambda authorizers
+- [x] **WAF Protection**: Web Application Firewall integration (required)
 - [x] **Security Control Overrides**: Extensible override system with audit justification
 
 ### Security Best Practices
@@ -59,6 +60,7 @@ This module implements security controls to comply with:
 - Use KMS customer-managed keys for log encryption
 - Configure throttling limits
 - Use IAM or Cognito authorizers for authentication
+- **Associate with WAF Web ACL for protection against common web exploits**
 - Enable CORS only for trusted origins
 - Use private or regional endpoints when possible
 
@@ -111,7 +113,18 @@ This module suppresses certain Checkov security checks that are either not appli
 - X-Ray tracing for observability
 - IAM role for CloudWatch Logs
 - Throttling and caching configuration
+- **WAF Web ACL integration (required for security)**
 - Security controls with override capability
+
+### WAF Protection
+
+The module requires a WAF Web ACL ARN to protect against common web exploits. The example includes a complete WAF configuration (`waf.tf`) with:
+
+- AWS Managed Rules for OWASP Top 10 protection
+- Known bad inputs blocking
+- IP reputation filtering
+- Rate limiting (configurable)
+- CloudWatch logging with sensitive field redaction
 
 ## MCP Servers
 
@@ -185,6 +198,9 @@ module "api_gateway" {
   # Direct reference to kms.tf module output
   kms_key_arn = module.kms_key.key_arn
 
+  # WAF Web ACL ARN (from local WAF resource)
+  waf_acl_arn = aws_wafv2_web_acl.api_gateway.arn
+
   # Stage configuration
   stage_name        = var.stage_name
   stage_description = var.stage_description
@@ -239,6 +255,7 @@ module "api_gateway" {
 | [aws_iam_role.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_permission.api_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_wafv2_web_acl_association.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl_association) | resource |
 | [aws_iam_policy_document.cloudwatch_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
@@ -283,6 +300,7 @@ module "api_gateway" {
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags to apply to resources | `map(string)` | `{}` | no |
 | <a name="input_throttling_burst_limit"></a> [throttling\_burst\_limit](#input\_throttling\_burst\_limit) | API Gateway throttling burst limit | `number` | `5000` | no |
 | <a name="input_throttling_rate_limit"></a> [throttling\_rate\_limit](#input\_throttling\_rate\_limit) | API Gateway throttling rate limit (requests per second) | `number` | `10000` | no |
+| <a name="input_waf_acl_arn"></a> [waf\_acl\_arn](#input\_waf\_acl\_arn) | ARN of the WAF Web ACL to associate with the API Gateway stage. Required for production environments to protect against common web exploits | `string` | n/a | yes |
 
 ## Outputs
 
