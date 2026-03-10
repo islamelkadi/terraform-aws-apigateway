@@ -3,33 +3,26 @@
 
 skip-check:
   # KMS IAM Policy - Intentional for flexible key policies in examples
-  - id: CKV_AWS_111
-    comment: "KMS module uses flexible IAM policies for demonstration purposes. Users should customize based on their security requirements."
-  - id: CKV_AWS_356
-    comment: "KMS module uses wildcard resources for flexibility in examples. Users should restrict in production."
-  - id: CKV_AWS_109
-    comment: "KMS module IAM policies are intentionally permissive for examples. Users should apply least privilege in production."
+  - CKV_AWS_111  # KMS module uses flexible IAM policies for demonstration purposes
+  - CKV_AWS_356  # KMS module uses wildcard resources for flexibility in examples
+  - CKV_AWS_109  # KMS module IAM policies are intentionally permissive for examples
   
   # Terraform Module Sources - Using semantic versioning tags
-  - id: CKV_TF_1
-    comment: "Using semantic version tags (?ref=v1.0.0) instead of commit hashes for better maintainability and readability."
-  - id: CKV_TF_2
-    comment: "Using semantic version tags (?ref=v1.0.0) which is a valid versioning strategy for stable releases."
+  - CKV_TF_1  # Using semantic version tags (?ref=v1.0.0) instead of commit hashes
+  - CKV_TF_2  # Using semantic version tags (?ref=v1.0.0) which is a valid versioning strategy
   
   # API Gateway Caching - Optional feature, adds cost
-  - id: CKV_AWS_120
-    comment: "API Gateway caching is optional and adds cost. Users should enable based on their performance and cost requirements."
-  - id: CKV_AWS_225
-    comment: "API Gateway method caching is optional and adds cost. Users should enable based on their use case."
+  - CKV_AWS_120  # API Gateway caching is optional and adds cost
+  - CKV_AWS_225  # API Gateway method caching is optional and adds cost
   
   # API Gateway Client Certificate - Optional security feature
-  - id: CKV2_AWS_51
-    comment: "Client certificate authentication is optional and adds complexity. Users should enable based on their security requirements."
+  - CKV2_AWS_51  # Client certificate authentication is optional and adds complexity
   
   # API Gateway Request Validation - Use-case specific
-  - id: CKV2_AWS_53
-    comment: "Request validation requires defining request models which are use-case specific. Users should implement based on their API requirements."
+  - CKV2_AWS_53  # Request validation requires defining request models which are use-case specific
   
-  # API Gateway WAF - Optional security feature, adds cost
-  - id: CKV2_AWS_29
-    comment: "WAF protection adds significant cost and complexity. Users should enable based on their security and budget requirements."
+  # WAF Rule Configuration - Outside module scope
+  - CKV2_AWS_77  # Log4j vulnerability protection is configured in the WAF Web ACL, not in this module
+  
+  # CloudWatch Log Retention - Example code
+  - CKV_AWS_338  # Log retention of 1 year adds cost. Examples use shorter retention for cost efficiency

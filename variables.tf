@@ -316,6 +316,12 @@ variable "kms_key_arn" {
   default     = null
 }
 
+# WAF Configuration
+variable "waf_acl_arn" {
+  description = "ARN of the WAF Web ACL to associate with the API Gateway stage. Required for production environments to protect against common web exploits"
+  type        = string
+}
+
 # Security Controls
 variable "security_controls" {
   description = "Security controls configuration from metadata module. Used to enforce security standards"

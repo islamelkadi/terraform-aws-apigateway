@@ -176,3 +176,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "waf_rate_limit" {
+  description = "Rate limit for WAF (requests per 5-minute period from a single IP)"
+  type        = number
+  default     = 2000
+}

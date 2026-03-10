@@ -53,6 +53,9 @@ module "api_gateway" {
   # Direct reference to kms.tf module output
   kms_key_arn = module.kms_key.key_arn
 
+  # WAF Web ACL ARN (from local WAF resource)
+  waf_acl_arn = aws_wafv2_web_acl.api_gateway.arn
+
   # Stage configuration
   stage_name        = var.stage_name
   stage_description = var.stage_description
