@@ -91,4 +91,4 @@ tags = {
 }
 
 # WAF Configuration
-waf_rate_limit = 2000  # requests per 5-minute period from a single IP
+waf_rate_limit = 2000 # requests per 5-minute period from a single IP

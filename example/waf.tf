@@ -30,8 +30,8 @@ resource "aws_wafv2_web_acl" "api_gateway" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                 = "CommonRuleSetMetric"
-      sampled_requests_enabled    = true
+      metric_name                = "CommonRuleSetMetric"
+      sampled_requests_enabled   = true
     }
   }
 
@@ -54,8 +54,8 @@ resource "aws_wafv2_web_acl" "api_gateway" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                 = "KnownBadInputsMetric"
-      sampled_requests_enabled    = true
+      metric_name                = "KnownBadInputsMetric"
+      sampled_requests_enabled   = true
     }
   }
 
@@ -78,8 +78,8 @@ resource "aws_wafv2_web_acl" "api_gateway" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                 = "IpReputationMetric"
-      sampled_requests_enabled    = true
+      metric_name                = "IpReputationMetric"
+      sampled_requests_enabled   = true
     }
   }
 
@@ -102,8 +102,8 @@ resource "aws_wafv2_web_acl" "api_gateway" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                 = "RateLimitMetric"
-      sampled_requests_enabled    = true
+      metric_name                = "RateLimitMetric"
+      sampled_requests_enabled   = true
     }
   }
 
@@ -118,8 +118,8 @@ resource "aws_wafv2_web_acl" "api_gateway" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                 = "${var.namespace}-${var.environment}-${var.name}-waf"
-    sampled_requests_enabled    = true
+    metric_name                = "${var.namespace}-${var.environment}-${var.name}-waf"
+    sampled_requests_enabled   = true
   }
 }
 
