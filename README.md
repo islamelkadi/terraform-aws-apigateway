@@ -1,5 +1,9 @@
 # Terraform AWS API Gateway REST API Module
 
+[![Terraform Security](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-security.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-security.yaml)
+[![Terraform Lint & Validation](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-lint.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-lint.yaml)
+[![Terraform Docs](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-docs.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-apigateway/actions/workflows/terraform-docs.yaml)
+
 This module creates an AWS API Gateway REST API with Lambda integration, mock integrations, CORS support, and security best practices.
 
 ## Table of Contents
@@ -80,6 +84,24 @@ Security controls are automatically applied based on the environment through the
 | Throttling | Relaxed | Production-like | Enforced |
 
 For full details on security profiles and how controls vary by environment, see the [Security Profiles](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) documentation.
+
+### Security Scan Suppressions
+
+This module suppresses certain Checkov security checks that are either not applicable to example/demo code or represent optional features. The following checks are suppressed in `.checkov.yaml`:
+
+**Module Source Versioning (CKV_TF_1, CKV_TF_2)**
+- Suppressed because we use semantic version tags (`?ref=v1.0.0`) instead of commit hashes for better maintainability and readability
+- Semantic versioning is a valid and widely-accepted versioning strategy for stable releases
+
+**KMS IAM Policies (CKV_AWS_111, CKV_AWS_356, CKV_AWS_109)**
+- Suppressed in example code where KMS modules use flexible IAM policies for demonstration purposes
+- Production deployments should customize KMS policies based on specific security requirements and apply least privilege principles
+
+**API Gateway Optional Features**
+- **Caching (CKV_AWS_120, CKV_AWS_225)**: Optional feature that adds cost; enable based on performance requirements
+- **Client Certificates (CKV2_AWS_51)**: Optional security feature that adds complexity; enable based on security requirements
+- **Request Validation (CKV2_AWS_53)**: Requires use-case-specific request models; implement based on API requirements
+- **WAF Protection (CKV2_AWS_29)**: Optional security feature that adds significant cost; enable based on security and budget requirements
 
 ## Features
 
